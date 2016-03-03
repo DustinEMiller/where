@@ -140,7 +140,7 @@ module.exports.slackHook = function(request, reply) {
           }
         })
         .then((employee) => {
-          reply(`Updated status to ${employee.status}, your default status is: ${employee.defaultStatus}, to change your default status use \`/${slashCommand} default:(wfo|wfh) \``);
+          reply(`Updated status to *${employee.status}*, your default status is: *${employee.defaultStatus}*, to change your default status use \`/${slashCommand} default:wfo\` for *InOffice* and \`/${slashCommand} default:wfh\` for *OutOfOffice*. You can also set a message with your status: \`/${slashCommand} This is my message!\``);
           logEvent(employee);
         });
 
