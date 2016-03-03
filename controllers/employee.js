@@ -152,6 +152,9 @@ module.exports.slackHook = function(request, reply) {
 };
 
 module.exports.getSlackStatus = function(request, reply) {
+  if (!slackTokenMatch(payload.token)) {
+    return reply(Boom.badRequest('Bad Request Token'));
+  }
 
   Employee.getAll()
     .then((workers) => {
