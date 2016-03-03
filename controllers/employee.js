@@ -150,3 +150,28 @@ module.exports.slackHook = function(request, reply) {
       reply(Boom.badImplementation());
     });
 };
+
+module.exports.getSlackStatus = function(request, reply) {
+
+  Employee.getAll()
+    .then((workers) => {
+      var reply = '';
+      workers.sort( function( a, b ) {
+        a = a.email.substring(a.email.indexOf(".")+1,a.email.lastIndexOf("@"));
+        b = b.email.substring(b.email.indexOf(".")+1,b.email.lastIndexOf("@"));
+
+        return a < b ? -1 : a > b ? 1 : 0;
+      });
+
+      workers.map(function(worker){
+        reply += worker.name + ' ' + worker.status.statusType + ': ' + worker.message + '\n';
+      });
+      reply(reply);
+    })
+    .catch((err) => {
+      console.log(err);
+      reply(Boom.badImplementation());
+    });
+
+};
+

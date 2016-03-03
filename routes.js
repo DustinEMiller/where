@@ -65,5 +65,11 @@ module.exports = [
     path:'/webhooks/slack',
     method:'POST',
     handler: employee.slackHook,
-  }
+  },
+
+  {
+    path: '/workers/slack/status',
+    method: 'GET',
+    handler: employee.getSlackStatus
+  },
 ];
