@@ -153,6 +153,7 @@ module.exports.slackHook = function(request, reply) {
 
 module.exports.getSlackStatus = function(request, reply) {
   const payload = request.payload; 
+  
   if (!slackTokenMatch(payload.token)) {
     return reply(Boom.badRequest('Bad Request Token'));
   }

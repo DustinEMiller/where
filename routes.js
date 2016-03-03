@@ -69,7 +69,7 @@ module.exports = [
 
   {
     path: '/workers/slack/status',
-    method: 'GET',
+    method: 'POST',
     handler: employee.getSlackStatus
   },
 ];
