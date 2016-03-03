@@ -34,6 +34,7 @@ module.exports = function(command) {
     return c;
   }
 
-  return getMessage(command);
+  return {commandType: commandTypes.message, value: command};
+  //return getMessage(command);
 
 };
