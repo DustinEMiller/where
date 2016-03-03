@@ -169,7 +169,11 @@ module.exports.getSlackStatus = function(request, reply) {
       });
 
       workers.map(function(worker){
-        status += worker.name + ' ' + worker.status.statusType + ': ' + worker.message + '\n';
+        var message = '';
+        if(worker.message){
+          message = ' - "'+worker.message+'"';
+        }
+        status += '*'+worker.name + '*: ' + worker.status.statusType + message + '\n';
       });
       reply(status);
     })
