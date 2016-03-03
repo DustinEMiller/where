@@ -153,14 +153,14 @@ module.exports.slackHook = function(request, reply) {
 
 module.exports.getSlackStatus = function(request, reply) {
   const payload = request.payload; 
-  
+
   if (!slackTokenMatch(payload.token)) {
     return reply(Boom.badRequest('Bad Request Token'));
   }
 
   Employee.getAll()
     .then((workers) => {
-      var reply = '';
+      var status = '';
       workers.sort( function( a, b ) {
         a = a.email.substring(a.email.indexOf(".")+1,a.email.lastIndexOf("@"));
         b = b.email.substring(b.email.indexOf(".")+1,b.email.lastIndexOf("@"));
@@ -169,9 +169,9 @@ module.exports.getSlackStatus = function(request, reply) {
       });
 
       workers.map(function(worker){
-        reply += worker.name + ' ' + worker.status.statusType + ': ' + worker.message + '\n';
+        status += worker.name + ' ' + worker.status.statusType + ': ' + worker.message + '\n';
       });
-      reply(reply);
+      reply(status);
     })
     .catch((err) => {
       console.log(err);
