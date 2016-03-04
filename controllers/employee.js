@@ -1,5 +1,6 @@
 'use strict';
 const Boom = require('boom');
+const request = require('request');
 
 const config = require('../config');
 const Employee = require('../models/employee');
@@ -142,6 +143,17 @@ module.exports.slackHook = function(request, reply) {
         .then((employee) => {
           reply(`Updated status to *${employee.status}*, your default status is: *${employee.defaultStatus}*, to change your default status use \`/${slashCommand} default:wfo\` for *InOffice* and \`/${slashCommand} default:wfh\` for *OutOfOffice*. You can also set a message with your status: \`/${slashCommand} This is my message!\``);
           logEvent(employee);
+        })
+        .then((employee) => {
+          request.post('https://hooks.slack.com/services/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', {
+            payload={
+              "channel": "#where",
+              "username": "Truancy Bot",
+              "text": "This is posted to #where and comes from a bot named Truacny Bot."
+            }
+          }, function(err, res) {
+            console.log(err, res);
+          });  
         });
 
     })
