@@ -184,7 +184,8 @@ module.exports.getWhere = function(request, reply) {
       });  
   } else {
     var searchText = payload.text.toLowerCase();
-    Employee.getByPartialName(searchText)
+    console.log(searchText);
+    Employee.getByPartialName(payload.text)
       .then((workers) => {
         var status = '';
         workers.sort( function( a, b ) {
