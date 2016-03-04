@@ -151,36 +151,61 @@ module.exports.slackHook = function(request, reply) {
     });
 };
 
-module.exports.getSlackStatus = function(request, reply) {
+module.exports.getWhere = function(request, reply) {
   const payload = request.payload; 
 
   if (!slackTokenMatch(payload.token)) {
     return reply(Boom.badRequest('Bad Request Token'));
   }
 
-  Employee.getAll()
-    .then((workers) => {
-      var status = '';
-      workers.sort( function( a, b ) {
-        a = a.email.substring(a.email.indexOf(".")+1,a.email.lastIndexOf("@"));
-        b = b.email.substring(b.email.indexOf(".")+1,b.email.lastIndexOf("@"));
+  if (payload.text === '') {
+    Employee.getAll()
+      .then((workers) => {
+        var status = '';
+        workers.sort( function( a, b ) {
+          a = a.email.substring(a.email.indexOf(".")+1,a.email.lastIndexOf("@"));
+          b = b.email.substring(b.email.indexOf(".")+1,b.email.lastIndexOf("@"));
 
-        return a < b ? -1 : a > b ? 1 : 0;
-      });
+          return a < b ? -1 : a > b ? 1 : 0;
+        });
 
-      workers.map(function(worker){
-        var message = '';
-        if(worker.message){
-          message = ' "'+worker.message+'"';
-        }
-        status += '*'+worker.name + '*: ' + worker.status.statusType + message + '\n';
-      });
-      reply(status);
-    })
-    .catch((err) => {
-      console.log(err);
-      reply(Boom.badImplementation());
-    });
+        workers.map(function(worker){
+          var message = '';
+          if(worker.message){
+            message = ' "'+worker.message+'"';
+          }
+          status += '*'+worker.name + '*: ' + worker.status.statusType + message + '\n';
+        });
+        reply(status);
+      })
+      .catch((err) => {
+        console.log(err);
+        reply(Boom.badImplementation());
+      });  
+  } else {
+    Employee.getByPartialName(payload.text)
+      .then((workers) => {
+        var status = '';
+        workers.sort( function( a, b ) {
+          a = a.email.substring(a.email.indexOf(".")+1,a.email.lastIndexOf("@"));
+          b = b.email.substring(b.email.indexOf(".")+1,b.email.lastIndexOf("@"));
 
+          return a < b ? -1 : a > b ? 1 : 0;
+        });
+
+        workers.map(function(worker){
+          var message = '';
+          if(worker.message){
+            message = ' "'+worker.message+'"';
+          }
+          status += '*'+worker.name + '*: ' + worker.status.statusType + message + '\n';
+        });
+        reply(status);
+      })
+      .catch((err) => {
+        console.log(err);
+        reply(Boom.badImplementation());
+      }); 
+  }
 };
 

@@ -68,8 +68,8 @@ module.exports = [
   },
 
   {
-    path: '/workers/slack/status',
+    path: '/webhooks/slack/where',
     method: 'POST',
-    handler: employee.getSlackStatus
+    handler: employee.getWhere
   },
 ];
