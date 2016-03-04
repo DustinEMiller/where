@@ -5,18 +5,20 @@ const commandMapper = require('./commandMapper');
 
 function commandParser(commandString, slashCommand) {
   var args = commandString.match(/-\w+/g),
-      message = '',
+      message = commandString,
       directives = {
         default:null,
         message:''
       }
-
-  args.map(function(argument) {
-    if(argument === '-default') {
-      directives.default = commandMapper(slashCommand);
-      message = message.replace(argument, "");
-    }
-  });
+      
+  if(args) {
+    args.map(function(argument) {
+      if(argument === '-default') {
+        directives.default = commandMapper(slashCommand);
+        message = message.replace(argument, "");
+      }
+    });
+  }
 
   directives.message = message;
   return directives;
