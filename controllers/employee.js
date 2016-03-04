@@ -183,7 +183,8 @@ module.exports.getWhere = function(request, reply) {
         reply(Boom.badImplementation());
       });  
   } else {
-    Employee.getByPartialName(payload.text)
+    var searchText = payload.text.toLowerCase();
+    Employee.getByPartialName(searchText)
       .then((workers) => {
         var status = '';
         workers.sort( function( a, b ) {
@@ -203,7 +204,6 @@ module.exports.getWhere = function(request, reply) {
         if (status === '') {
           status = 'No employees found.'
         }
-        console.log('wahooo!');
         reply(status);
       })
       .catch((err) => {
