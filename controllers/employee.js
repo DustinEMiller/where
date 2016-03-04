@@ -200,6 +200,10 @@ module.exports.getWhere = function(request, reply) {
           }
           status += '*'+worker.name + '*: ' + worker.status.statusType + message + '\n';
         });
+        if (status === '') {
+          status = 'No employees found.'
+        }
+        console.log('wahooo!');
         reply(status);
       })
       .catch((err) => {

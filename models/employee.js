@@ -126,7 +126,34 @@ internals.Employee.getByPartialName = function(name) {
       if (!employees) {
         return [];
       }
-      
+
+      let batchUpdates = [];
+
+      employees = employees.map((employee) => {
+        let status = employee.status;
+
+        internals.Employee.setDefaultStatusBasedOnTime(employee);
+
+        //update database and send events to analytics for users that have not logged their status today.
+        if (employee.statusExpired) {
+          batchUpdates.push(employee);
+        }
+
+        return {
+          id: employee._id,
+          name: employee.name,
+          email: employee.email,
+          status: {
+            statusType: employee.status, // to be determined at run time.
+            defaultStatus: employee.defaultStatus,
+            isDefault: employee.status === employee.defaultStatus
+          },
+          message: employee.message
+        };
+      });
+
+      internals.Employee.batchUpdate(batchUpdates);
+
       return employees;
     });
 };
