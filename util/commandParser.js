@@ -4,14 +4,14 @@ const commandTypes = require('../constants/commandTypes');
 const commandMapper = require('./commandMapper');
 
 function commandParser(commandString, slashCommand) {
-  var arguments = [],
+  var args = commandString.match(/-\w+/g),
       message = '',
       directives = {
         default:null,
         message:''
       }
-  arguments = commandString.match(/-\w+/g);
-  arguments.map(function(argument) {
+
+  args.map(function(argument) {
     if(argument === '-default') {
       directives.default = commandMapper(slashCommand);
       message = message.replace(argument, "");
