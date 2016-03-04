@@ -123,6 +123,7 @@ internals.Employee.getByEmail = function(email) {
 internals.Employee.getByPartialName = function(name) {
   return Base.view(`${TYPE}/byPartialName`, name)
     .then((employees) => {
+      console.log(employees);
       if (!employees) {
         return [];
       }
@@ -270,11 +271,9 @@ db.save('_design/' + TYPE, {
       if (doc.name && doc.type === 'Employee') {
         var words = {};
         doc.name.replace(/\w+/g, function(word) {
-          console.log(word);
           words[word.toLowerCase()] = true;
         });
         for (w in words) {
-          console.log(w);
           emit(w, doc);
         }
       }

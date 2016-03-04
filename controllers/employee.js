@@ -184,8 +184,7 @@ module.exports.getWhere = function(request, reply) {
       });  
   } else {
     var searchText = payload.text.toLowerCase();
-    console.log(searchText);
-    Employee.getByPartialName(payload.text)
+    Employee.getByPartialName(searchText)
       .then((workers) => {
         var status = '';
         workers.sort( function( a, b ) {
@@ -202,6 +201,7 @@ module.exports.getWhere = function(request, reply) {
           }
           status += '*'+worker.name + '*: ' + worker.status.statusType + message + '\n';
         });
+        console.log(status);
         if (status === '') {
           status = 'No employees found.'
         }
