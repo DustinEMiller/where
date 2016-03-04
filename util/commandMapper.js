@@ -8,10 +8,12 @@ var internals = {};
 module.exports = internals.commands = function(command) {
 
   switch (command) {
-  case commands.wfh:
+  case commands.out:
     return statuses.OutOfOffice;
-  case commands.wfo:
+  case commands.in:
     return statuses.InOffice;
+  case commands.remote:
+    return statuses.Remote;
   case commands.wfotest:
     return statuses.InOffice;
   case commands.wfhtest:

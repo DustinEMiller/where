@@ -136,17 +136,11 @@ internals.Employee.updateStatus = function(email, status, command) {
           message: ''
         };
 
-        if (command && !!commandTypes[command.commandType]) {
-
-          if (command.commandType === commandTypes.default && internals.Employee.isValidStatus(command.value)) {
-
-            attr.defaultStatus = command.value;
-          }
-
-          if (command.commandType === commandTypes.message) {
-            attr.message = command.value;
-          }
+        if (command.default) {
+          attr.defaultStatus = command.default;  
         }
+
+        attr.message = command.message;
 
         return internals.Employee.update(employee, attr)
           .then(internals.Employee.appendStatus);
@@ -168,7 +162,7 @@ internals.Employee.setDefaultStatusBasedOnTime = function(employee, overrideCurr
   if (hours >= 20 && current.clone().subtract(1, 'days').isSame(dateModified, 'd')) {
     //any statuses set yesterday at 8pm onwards
     return employee;
-
+  //hours should be 2 for GMT 8pm cst
   } else if (hours < 20 && current.isSame(dateModified, 'd')) {
     //any statuses set today
     return employee;

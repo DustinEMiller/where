@@ -3,38 +3,25 @@ const commands = require('../constants/commands');
 const commandTypes = require('../constants/commandTypes');
 const commandMapper = require('./commandMapper');
 
-function getDefaultStatus(command) {
-  let c =  commandParser(commandTypes.default, command);
+function commandParser(commandString, slashCommand) {
+  let arguments = commandString.match(/-\w+/g),
+      message = '',
+      directives = {
+        default:null,
+        message:''
+      }
 
-  if (c) {
-    c.value = commandMapper(c.value);
-  }
+  arguments.map(function(argument) {
+    if(argument === '-default') {
+      directives.default = commandMapper(slashCommand);
+      message = message.replace(argument, "");
+    }
+  });
 
-  return c;
+  directives.message = message;
+  return directives;
 }
 
-function commandParser(commandType, command) {
-  let paramSplit = command.split(`${commandType}:`);
-
-  if (paramSplit.length === 2) {
-    return {commandType: commandType, value: paramSplit[1]};
-  } else {
-    return null;
-  }
-}
-
-function getMessage(command) {
-  return commandParser(commandTypes.message, command);
-}
-
-module.exports = function(command) {
-  let c = getDefaultStatus(command);
-
-  if (c) {
-    return c;
-  }
-
-  return {commandType: commandTypes.message, value: command};
-  //return getMessage(command);
-
+module.exports = function(command, slashCommand) {
+  return commandParser(command, slashCommand);
 };

@@ -5,6 +5,7 @@ const keyMirror = require('keymirror');
 module.exports = keyMirror({
   InOffice: null,
   OutOfOffice: null,
+  Remote: null,
   Sick: null,
   Holiday: null
 });

@@ -115,7 +115,7 @@ module.exports.slackHook = function(request, reply) {
 
   const slashCommand = payload.command.substr('1');
   const status = commandMapper(slashCommand);
-  const command = commandParser(payload.text);
+  const command = commandParser(payload.text, slashCommand);
 
   slack.getUserInfo(payload.user_id)
     .then((result) => {
