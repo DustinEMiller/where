@@ -151,8 +151,7 @@ module.exports.slackHook = function(request, reply) {
               "username": "Truancy Bot",
               "text": "This is posted to #where and comes from a bot named Truacny Bot."
             }
-          }
-            
+          });  
           }, function(err, res) {
             console.log(err, res);
           });  
