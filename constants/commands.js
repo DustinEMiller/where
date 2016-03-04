@@ -2,7 +2,7 @@
 const keyMirror = require('keymirror');
 
 module.exports = keyMirror({
-  in: null,
+  here: null,
   out: null,
   remote: null,
   wfhtest: null,

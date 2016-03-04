@@ -10,7 +10,7 @@ module.exports = internals.commands = function(command) {
   switch (command) {
   case commands.out:
     return statuses.OutOfOffice;
-  case commands.in:
+  case commands.here:
     return statuses.InOffice;
   case commands.remote:
     return statuses.Remote;

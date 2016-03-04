@@ -4,7 +4,7 @@ const request = require('request');
 const keyMirror = require('keymirror');
 const camelCase = require('camelcase-keys-recursive');
 
-const commands = keyMirror({in:null, out:null, remote:null, wfhtest:null});
+const commands = keyMirror({here:null, out:null, remote:null, wfhtest:null});
 var internals = {};
 
 module.exports = internals.Slack = function(options) {

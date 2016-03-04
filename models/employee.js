@@ -120,6 +120,17 @@ internals.Employee.getByEmail = function(email) {
     });
 };
 
+internals.Employee.getByPartialName = function(name) {
+  return Base.view(`${TYPE}/byPartialName`, name)
+    .then((employees) => {
+      if (!employees) {
+        return [];
+      }
+      
+      return employees;
+    });
+};
+
 internals.Employee.isValidStatus = function(status) {
   return !!statuses[status];
 };
@@ -224,6 +235,19 @@ db.save('_design/' + TYPE, {
     map: function(doc) {
       if (doc.type === 'Employee') {
         emit(doc.name, doc);
+      }
+    }
+  },
+  byPartialName: {
+    map: function(doc) {
+      if (doc.name && doc.type === 'Employee') {
+        var words = {};
+        doc.name.replace(/\w+/g, function(word) {
+          words[word.toLowerCase()] = true;
+        });
+        for (w in words) {
+          emit(w, doc);
+        }
       }
     }
   }
