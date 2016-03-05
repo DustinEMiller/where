@@ -1,6 +1,6 @@
 'use strict';
 const Boom = require('boom');
-const request = require('request');
+const req = require('request');
 
 const config = require('../config');
 const Employee = require('../models/employee');
@@ -145,7 +145,7 @@ module.exports.slackHook = function(request, reply) {
           logEvent(employee);
         })
         .then((employee) => {
-          request({
+          req({
             url: 'https://hooks.slack.com/services/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',
             method: 'POST',
             json: {
