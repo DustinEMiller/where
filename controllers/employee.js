@@ -107,7 +107,6 @@ function slackTokenMatch(token) {
 }
 
 module.exports.slackHook = function(request, reply) {
-  console.log(request.payload);
   const payload = request.payload;
 
   if (!slackTokenMatch(payload.token)) {

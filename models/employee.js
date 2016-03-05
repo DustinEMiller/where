@@ -92,6 +92,7 @@ internals.Employee.batchUpdate = function(employees) {
         console.log(`Updated ${employee.name} status:${employee.status} in background`);
       })
       .catch(err => {
+        console.log(err);
         console.log(`Error updating ${employee.name} status in background`);
       });
   });
