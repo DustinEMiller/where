@@ -153,7 +153,7 @@ module.exports.slackHook = function(request, reply) {
           botResponse = '*' + employee.name + '*: ' + employee.status + employee.message;
           req({
             url: 'https://hooks.slack.com/services/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',
-            method: 'POST','
+            method: 'POST',
             json: {
               channel: "#where",
               username: "Where Bot",
