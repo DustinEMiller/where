@@ -145,7 +145,7 @@ module.exports.slackHook = function(request, reply) {
           logEvent(employee);
         })
         .then((employee) => {
-          console.lo
+          console.log(employee);
           var message = '',
               botResponse;
           if(employee.message){
