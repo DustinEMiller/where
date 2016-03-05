@@ -92,7 +92,6 @@ internals.Employee.batchUpdate = function(employees) {
         console.log(`Updated ${employee.name} status:${employee.status} in background`);
       })
       .catch(err => {
-        console.log(err);
         console.log(`Error updating ${employee.name} status in background`);
       });
   });
@@ -176,11 +175,13 @@ internals.Employee.updateStatus = function(email, status, command) {
           message: ''
         };
 
-        if (command.default) {
+        if ("default" in command) {
           attr.defaultStatus = command.default;  
         }
 
-        attr.message = command.message;
+        if ("message" in command) {
+          attr.message = command.message;
+        }
 
         return internals.Employee.update(employee, attr)
           .then(internals.Employee.appendStatus);
@@ -198,10 +199,6 @@ internals.Employee.setDefaultStatusBasedOnTime = function(employee, overrideCurr
 
   const dateModified = moment(employee.dateModified);
   const hours = dateModified.hours();
-
-  console.log(hours);
-  console.log(current);
-  console.log(dateModified);
 
   if (hours >= 20 && current.clone().subtract(1, 'days').isSame(dateModified, 'd')) {
     //any statuses set yesterday at 8pm onwards
