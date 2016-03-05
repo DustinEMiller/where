@@ -145,12 +145,13 @@ module.exports.slackHook = function(request, reply) {
           logEvent(employee);
         })
         .then((employee) => {
+          console.lo
           var message = '',
               botResponse;
           if(employee.message){
             message = ' "'+employee.message+'"';
           }
-          botResponse = '*' + employee.name + '*: ' + employee.status + employee.message;
+          botResponse = '*' + employee.name + '*: ' + employee.status + message;
           req({
             url: 'https://hooks.slack.com/services/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',
             method: 'POST',
