@@ -145,14 +145,19 @@ module.exports.slackHook = function(request, reply) {
           logEvent(employee);
         })
         .then((employee) => {
-          var message = '*' + employee.name + '*: ' + employee.status + ' "' + employee.status + '" '
+          var message = '',
+              botResponse;
+          if(employee.message){
+            message = ' "'+employee.message+'"';
+          }
+          botResponse = '*' + employee.name + '*: ' + employee.status + employee.message;
           req({
             url: 'https://hooks.slack.com/services/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',
             method: 'POST','
             json: {
               channel: "#where",
               username: "Where Bot",
-              text: "This is posted to #where and comes from a bot named Truacny Bot."
+              text: botResponse
             }
           }, function(err, res) {
             console.log(err, res);
