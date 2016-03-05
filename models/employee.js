@@ -92,6 +92,8 @@ internals.Employee.batchUpdate = function(employees) {
         console.log(`Updated ${employee.name} status:${employee.status} in background`);
       })
       .catch(err => {
+        console.log(err);
+        console.log(employee);
         console.log(`Error updating ${employee.name} status in background`);
       });
   });
@@ -232,6 +234,8 @@ internals.Employee.appendStatus = function(employee) {
       name: employee.name,
       message: employee.message
     }, function(err, res) {
+      console.log('append');
+      console.log(err);
       if (err) {
         return reject(err);
       }
