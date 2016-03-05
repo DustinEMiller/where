@@ -217,7 +217,7 @@ module.exports.getWhere = function(request, reply) {
           }
           status += '*'+worker.name + '*: ' + worker.status.statusType + message + '\n';
         });
-        console.log(status);
+        
         if (status === '') {
           status = 'No employees found.'
         }
