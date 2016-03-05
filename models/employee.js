@@ -177,14 +177,16 @@ internals.Employee.updateStatus = function(email, status, command) {
           message: ''
         };
 
-        if ("default" in command) {
-          if(command.default){
-            attr.defaultStatus = command.default;  
+        if (command) {
+          if ("default" in command) {
+            if(command.default){
+              attr.defaultStatus = command.default;  
+            }
           }
-        }
 
-        if ("message" in command) {
-          attr.message = command.message;
+          if ("message" in command) {
+            attr.message = command.message;
+          }
         }
 
         return internals.Employee.update(employee, attr)
