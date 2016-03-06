@@ -202,7 +202,7 @@ internals.Employee.setDefaultStatusBasedOnTime = function(employee, overrideCurr
 
   const dateModified = moment(employee.dateModified);
   const hours = dateModified.hours();
-  console.log(hours);
+  console.log(currentHours);
 
   if (hours >= 20 && current.clone().subtract(1, 'days').isSame(dateModified, 'd')) {
     //any statuses set yesterday at 8pm onwards
