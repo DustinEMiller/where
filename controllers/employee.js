@@ -157,7 +157,7 @@ module.exports.slackHook = function(request, reply) {
           }, function(err, res) {
             console.log(err, res);
           });
-          reply(`Updated status to *${employee.status}*, your default status is: *${employee.defaultStatus}*. \nTo change your default status use \`/here -default` for *InOffice*, \`/out -default` for *OutOfOffice* and \`/remote -default` for *Remote* You may also attach a message to your status. \`/${slashCommand} -default This is my message!\` or \`/${slashCommand} This is my message!\``);
+          reply(`Updated status to *${employee.status}*, your default status is: *${employee.defaultStatus}*. \nTo change your default status use \`/here -default` for *InOffice*, \`/out -default` for *OutOfOffice* and \`/remote -default` for *Remote*`);
           logEvent(employee);
         });
     })
