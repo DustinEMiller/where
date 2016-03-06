@@ -157,7 +157,7 @@ module.exports.slackHook = function(request, reply) {
           }, function(err, res) {
             console.log(err, res);
           });
-          reply(`Updated status to *${employee.status}*, your default status is: *${employee.defaultStatus}*. \nTo change your default status use \`/here -default` for *InOffice*, \`/out -default` for *OutOfOffice* and \`/remote -default` for *Remote* You may also attache a message to your status. \`/${slashCommand} -default This is my message!\` or \`/${slashCommand} This is my message!\`. \n To view status use \`/where \`. You may also use a _single_ word as a search condition. \`/$where jeff\``);
+          reply(`Updated status to *${employee.status}*, your default status is: *${employee.defaultStatus}*. \nTo change your default status use \`/here -default` for *InOffice*, \`/out -default` for *OutOfOffice* and \`/remote -default` for *Remote* You may also attache a message to your status. \`/${slashCommand} -default This is my message!\` or \`/${slashCommand} This is my message!\`. \n To view status use \`/where \`. You may also use a _single_ word as a search condition. \`/where jeff\``);
           logEvent(employee);
         });
     })
