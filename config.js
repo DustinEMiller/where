@@ -17,7 +17,7 @@ module.exports = {
   slack:{
     token: getEnv('SLACK_TOKEN', ''),
     webhooks:{
-      requestTokens: getEnv('SLACK_WEBHOOK_TOKENS', '').split(',')
+      requestTokens: getEnv('WHERE_SLACK_WEBHOOK_TOKENS', '').split(',')
     }
   },
   auth:{
