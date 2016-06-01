@@ -5,11 +5,11 @@ var path = require('path');
 module.exports = {
   port: getEnv.int('PORT', 3000),
   couchDb:{
-    username: getEnv('COUCHDB_USERNAME', ''),
-    password: getEnv('COUCHDB_PASSWORD', ''),
-    url: getEnv('COUCHDB_URL', 'http://127.0.0.1'),
-    port: getEnv.int('COUCHDB_PORT', 5984),
-    dbName: getEnv('COUCHDB_NAME', 'wfh')
+    username: getEnv('WHERE_USERNAME', ''),
+    password: getEnv('WHERE_PASSWORD', ''),
+    host: getEnv('MONGO_HOST', 'localhost'),,
+    port: getEnv.int('MONGO_PORT', 27017),
+    dbName: getEnv('WHERE_MONGO_NAME', 'where')
   },
   segment:{
     writeKey: getEnv('SEGMENT_IO_WRITE_KEY', ''),
