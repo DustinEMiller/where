@@ -4,7 +4,7 @@ const req = require('request');
 
 const config = require('../config');
 const Employee = require('../models/employee');
-const logEvent = require('../util/logEvent');
+const Status = require('../models/status');
 const Slack = require('../util/slack');
 const commandMapper = require('../util/commandMapper');
 const commandParser = require('../util/commandParser');
@@ -29,9 +29,11 @@ module.exports.getAll = function(request, reply) {
 
 module.exports.addNew = function(request, reply) {
 
-  var payload = request.payload;
+  let payload = request.payload;
 
-  Employee.getByEmail(payload.email)
+  let newEmployee
+
+  Employee.findOneAsync({email: payload.email})
     .then((employee) => {
       if (employee) {
         return reply(Boom.conflict());
@@ -40,6 +42,24 @@ module.exports.addNew = function(request, reply) {
       if (!Employee.isValidStatus(payload.status)) {
         return reply(Boom.badRequest(`Not a valid status type Email: ${payload.email}`));
       }
+
+      //let newEmployee = new Employee 
+    })
+    .catch((err) => {
+      console.log(err);
+      reply(Boom.badImplementation());
+    });
+
+  /*Employee.getByEmail(payload.email)
+    .then((employee) => {
+      if (employee) {
+        return reply(Boom.conflict());
+      }
+
+      if (!Employee.isValidStatus(payload.status)) {
+        return reply(Boom.badRequest(`Not a valid status type Email: ${payload.email}`));
+      }
+
 
       var employee = new Employee(payload)
         .save(payload)
@@ -56,7 +76,7 @@ module.exports.addNew = function(request, reply) {
     .catch((err) => {
       console.log(err);
       reply(Boom.badImplementation());
-    });
+    });*/
 
 };
 
