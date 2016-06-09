@@ -37,28 +37,28 @@ module.exports = [
     path: '/workers/{id}',
     method: 'DELETE',
     handler: employee.delete,
-    config:{
+    /*config:{
       validate:{
         params:{
           id: Joi.string().guid()
         }
       },
       auth: 'simple'
-    }
+    }*/
   },
 
   {
     path: '/workers',
     method: 'PUT',
     handler: employee.updateStatus,
-    config: {
+    /*config: {
       validate:{
         payload:{
           email: Joi.string().email(),
           status: Joi.string().min(4)
         }
       }
-    }
+    }*/
   },
 
   {
