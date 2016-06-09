@@ -31,8 +31,6 @@ module.exports.addNew = function(request, reply) {
 
   let payload = request.payload;
 
-  console.log(payload);
-
   Employee.findOneAsync({email: payload.email})
     .then((employee) => {
       if (employee) {
@@ -140,6 +138,29 @@ module.exports.slackHook = function(request, reply) {
   slack.getUserInfo(payload.user_id)
     .then((result) => {
       const profile = result.user.profile;
+
+      Employee.findOneAsync({email: profile.email})
+        .then((employee) => {
+
+          if (!employee) {
+
+            return new Employee({
+              name: profile.realName,
+              email: profile.email,
+              default_status: status,
+              status: status,
+              schedule:,
+            })
+            .save();
+
+          } else {
+            return Employee.updateStatus(employee.email, status, command);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          reply(Boom.badImplementation());
+        });
 
       return Employee.getByEmail(profile.email)
         .then((employee) => {

@@ -12,8 +12,20 @@ employeeSchema = new Schema({
   schedule: [String],
   date_created: Date,
   date_updated: Date,
-  status: {type: Schema.Types.ObjectId, ref: 'Status'}
+  status: String
 });
+
+employeeSchema.pre('save', function(next) {
+  var currentDate = new Date();
+  
+  this.date_updated = currentDate;
+
+  if (!this.date_created) {
+    this.date_created = currentDate;
+  }
+
+  next();  
+})
 
 employeeSchema
   .path('email')
