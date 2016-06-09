@@ -21,7 +21,7 @@ module.exports = [
     path: '/workers',
     method: 'POST',
     handler: employee.addNew,
-    config:{
+    /*config:{
       validate:{
         payload:{
           name: Joi.string().min(1),
@@ -29,7 +29,7 @@ module.exports = [
           status: Joi.string().min(4)
         }
       },
-      auth: 'simple'
+      auth: 'simple'*/
     }
   },
 
