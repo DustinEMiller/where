@@ -12,7 +12,7 @@ employeeSchema = new Schema({
   schedule: [String],
   date_created: Date,
   date_updated: Date,
-  status: {type: Schema.Types.Status, ref: 'Status'}
+  status: {type: Schema.Types.ObjectId, ref: 'Status'}
 });
 
 employeeSchema
