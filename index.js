@@ -19,9 +19,9 @@ mongoose.connection.on('error', function(err) {
   process.exit(-1);
 });
 
-server.register(require('hapi-auth-basic'), () => {
+server.register(() => {
 
-  server.auth.strategy('simple', 'basic', {validateFunc: validate});
+  //server.auth.strategy('simple', 'basic', {validateFunc: validate});
 
   server.route(require('./routes'));
 
