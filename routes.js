@@ -29,8 +29,8 @@ module.exports = [
           status: Joi.string().min(4)
         }
       },
-      auth: 'simple'*/
-    }
+      auth: 'simple'
+    }*/
   },
 
   {
