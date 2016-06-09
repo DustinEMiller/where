@@ -31,7 +31,7 @@ module.exports.addNew = function(request, reply) {
 
   let payload = request.payload;
 
-  let newEmployee
+  console.log(payload);
 
   Employee.findOneAsync({email: payload.email})
     .then((employee) => {
