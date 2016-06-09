@@ -1,6 +1,6 @@
 'use strict'
 
-const mongoose = require('bluebird').promisifyAll(require('mongoose'));,
+const mongoose = require('bluebird').promisifyAll(require('mongoose')),
     Schema = mongoose.Schema,
     statusSchema = new Schema({
       employee: {type: Schema.Types.ObjectId, ref: 'Employee'},
